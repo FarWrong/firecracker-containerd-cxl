@@ -374,10 +374,12 @@ func (s *service) StartShim(shimCtx context.Context, opts shim.StartOpts) (strin
 	}
 
 	fcControlClient := fccontrolTtrpc.NewFirecrackerClient(ttrpcClient)
+	anonymousMemory := bundleDir.OCIConfig().AnonymousMemory()
 	_, err = fcControlClient.CreateVM(shimCtx, &proto.CreateVMRequest{
 		VMID:                     s.vmID,
 		ExitAfterAllTasksDeleted: exitAfterAllTasksDeleted,
 		ContainerCount:           int32(containerCount),
+		AnonymousMemory:          anonymousMemory,
 	})
 	if err != nil {
 		errStatus, ok := status.FromError(err)
@@ -568,7 +570,7 @@ func (s *service) createVM(requestCtx context.Context, request *proto.CreateVMRe
 		return fmt.Errorf("failed to get relative path to firecracker vsock: %w", err)
 	}
 
-	jailedOpts, err := s.jailer.BuildJailedMachine(s.config, s.machineConfig, s.vmID)
+	jailedOpts, err := s.jailer.BuildJailedMachine(s.config, s.machineConfig, s.vmID, request.GetAnonymousMemory())
 	if err != nil {
 		return fmt.Errorf("failed to build jailed machine options: %w", err)
 	}

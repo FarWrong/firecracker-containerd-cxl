@@ -40,7 +40,7 @@ type jailer interface {
 	// BuildJailedMachine will modify the firecracker.Config and provide
 	// firecracker.Opt to be passed into firecracker.NewMachine which will allow
 	// for the VM to be jailed.
-	BuildJailedMachine(cfg *config.Config, machineCfg *firecracker.Config, vmID string) ([]firecracker.Opt, error)
+	BuildJailedMachine(cfg *config.Config, machineCfg *firecracker.Config, vmID string, anonymousMemory bool) ([]firecracker.Opt, error)
 	// ExposeFileToJail will expose the given file to the jailed filesystem, including
 	// regular files and block devices. An error is returned if provided a path to a file
 	// with type that is not supported.

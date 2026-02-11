@@ -128,3 +128,23 @@ func (c *OCIConfig) VMID() (string, error) {
 	// how to deal with
 	return ociConfig.Annotations[firecrackeroci.VMIDAnnotationKey], nil
 }
+
+// AnonymousMemory returns true if the anonymous-memory annotation is set in the OCI config.
+func (c *OCIConfig) AnonymousMemory() bool {
+	ociConfigFile, err := c.File()
+	if err != nil {
+		return false
+	}
+	defer ociConfigFile.Close()
+
+	var ociConfig struct {
+		Annotations map[string]string `json:"annotations,omitempty"`
+	}
+
+	if err := json.NewDecoder(ociConfigFile).Decode(&ociConfig); err != nil {
+		return false
+	}
+
+	val := ociConfig.Annotations[firecrackeroci.AnonymousMemoryAnnotationKey]
+	return val == "true" || val == "1"
+}

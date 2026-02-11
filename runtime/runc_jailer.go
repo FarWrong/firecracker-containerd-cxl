@@ -176,7 +176,7 @@ func (j *runcJailer) JailPath() vm.Dir {
 // BuildJailedMachine will return the needed options for a jailed Firecracker
 // instance. In addition, some configuration values will be overwritten to the
 // jailed values, like SocketPath in the machineConfig.
-func (j *runcJailer) BuildJailedMachine(cfg *config.Config, machineConfig *firecracker.Config, vmID string) ([]firecracker.Opt, error) {
+func (j *runcJailer) BuildJailedMachine(cfg *config.Config, machineConfig *firecracker.Config, vmID string, anonymousMemory bool) ([]firecracker.Opt, error) {
 	handler := j.BuildJailedRootHandler(cfg, machineConfig, vmID)
 	fifoHandler := j.BuildLinkFifoHandler()
 

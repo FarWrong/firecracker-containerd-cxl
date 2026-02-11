@@ -41,6 +41,10 @@ message CreateVMRequest {
     string MetricsFifoPath = 13;
 
     FirecrackerBalloonDevice BalloonDevice = 14;
+
+    // Use anonymous (local) memory instead of DAX/CXL for guest RAM.
+    // Shadow VMs use this to avoid consuming DAX surface.
+    bool AnonymousMemory = 15;
 }
 
 message CreateVMResponse {

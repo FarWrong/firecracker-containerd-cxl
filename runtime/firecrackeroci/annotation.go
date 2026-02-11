@@ -24,6 +24,10 @@ const (
 	// VMIDAnnotationKey is the key specified in an OCI-runtime config annotation section
 	// specifying the ID of the VM in which the container should be spun up.
 	VMIDAnnotationKey = "aws.firecracker.vm.id"
+
+	// AnonymousMemoryAnnotationKey signals that the VM should use anonymous
+	// (local) memory instead of DAX/CXL for guest RAM.
+	AnonymousMemoryAnnotationKey = "aws.firecracker.anonymous-memory"
 )
 
 // WithVMID annotates a containerd client's container object with a given firecracker VMID.

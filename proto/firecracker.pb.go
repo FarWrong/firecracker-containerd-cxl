@@ -99,6 +99,7 @@ type CreateVMRequest struct {
 	LogFifoPath              string                    `protobuf:"bytes,12,opt,name=LogFifoPath,proto3" json:"LogFifoPath,omitempty"`
 	MetricsFifoPath          string                    `protobuf:"bytes,13,opt,name=MetricsFifoPath,proto3" json:"MetricsFifoPath,omitempty"`
 	BalloonDevice            *FirecrackerBalloonDevice `protobuf:"bytes,14,opt,name=BalloonDevice,proto3" json:"BalloonDevice,omitempty"`
+	AnonymousMemory          bool                      `protobuf:"varint,15,opt,name=AnonymousMemory,proto3" json:"AnonymousMemory,omitempty"`
 }
 
 func (x *CreateVMRequest) Reset() {
@@ -229,6 +230,13 @@ func (x *CreateVMRequest) GetBalloonDevice() *FirecrackerBalloonDevice {
 		return x.BalloonDevice
 	}
 	return nil
+}
+
+func (x *CreateVMRequest) GetAnonymousMemory() bool {
+	if x != nil {
+		return x.AnonymousMemory
+	}
+	return false
 }
 
 type CreateVMResponse struct {
