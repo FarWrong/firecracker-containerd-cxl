@@ -26,8 +26,8 @@ import (
 )
 
 const (
-	defaultMemSizeMb = 2024
-	defaultCPUCount  = 1
+	defaultMemSizeMb = 8096
+	defaultCPUCount  = 16
 )
 
 func machineConfigurationFromProto(cfg *config.Config, req *proto.FirecrackerMachineConfiguration) models.MachineConfiguration {
